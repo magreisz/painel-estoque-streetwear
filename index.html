@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel Streetwear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="topstrip">PAINEL INTERNO · DADOS FICTÍCIOS DE DEMONSTRAÇÃO · <span id="fonte-info"></span></div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">STREET</span>
+        <span class="brand-sub">STREETWEAR · CONTROL ROOM</span>
+      </div>
+      <nav class="menu">
+        <a href="#dre" data-view="dre" class="active"><span class="ico">$</span>Visão Geral (DRE)</a>
+        <a href="#pedidos" data-view="pedidos"><span class="ico">#</span>Pedidos</a>
+        <a href="#estoque" data-view="estoque"><span class="ico">▦</span>Estoque Inteligente</a>
+      </nav>
+      <div class="side-foot">
+        <div class="conn">
+          <span class="dot dot-off"></span>
+          <div><strong>Nuvemshop API</strong><br><small>Fase 2 · não conectado</small></div>
+        </div>
+        <div class="conn">
+          <span class="dot dot-on"></span>
+          <div><strong>Base local</strong><br><small id="side-data"></small></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <!-- ===================== VISÃO GERAL (DRE) ===================== -->
+      <section id="view-dre" class="view active">
+        <header class="view-head">
+          <div>
+            <h1>Visão Geral <em>DRE</em></h1>
+            <p class="lead">Resultado mensal da operação: quanto entrou, para onde foi e quanto sobrou.</p>
+          </div>
+          <div class="seg" id="dre-mes"></div>
+        </header>
+
+        <div class="kpis" id="dre-kpis"></div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head">
+              <h3>Para onde vai cada R$ vendido</h3>
+              <span class="hint">Custos + lucro = faturamento do mês</span>
+            </div>
+            <div class="chart-box"><canvas id="ch-composicao"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <h3>Peças vendidas por grade</h3>
+              <span class="hint">Normal (P ao GG) × Plus size (G1 ao G3)</span>
+            </div>
+            <div class="chart-box"><canvas id="ch-grade"></canvas></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Lucro por tipo de venda</h3>
+            <span class="hint">Economia unitária por tipo de venda</span>
+          </div>
+          <div class="table-wrap"><table class="tbl" id="tbl-unitario"></table></div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-head">
+              <h3>Simulador de margem</h3>
+              <span class="hint">Mexa nos números e veja o lucro por venda</span>
+            </div>
+            <div class="sim" id="simulador"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PEDIDOS ===================== -->
+      <section id="view-pedidos" class="view">
+        <header class="view-head">
+          <div>
+            <h1>Pedidos</h1>
+            <p class="lead">Status, cancelamentos, taxas do canal e destino das vendas.</p>
+          </div>
+          <span class="tag" id="canal-tag"></span>
+        </header>
+
+        <div class="kpis" id="ped-kpis"></div>
+        <div class="alert" id="ped-alerta"></div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-head"><h3>Pedidos por status</h3></div>
+            <div class="chart-box sm"><canvas id="ch-status"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Pedidos por estado</h3></div>
+            <div class="chart-box sm"><canvas id="ch-uf"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Tamanhos mais pedidos</h3><span class="hint">classificado automaticamente</span></div>
+            <div class="chart-box sm"><canvas id="ch-ped-tam"></canvas></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Lista de pedidos</h3>
+            <div class="filters">
+              <input type="search" id="ped-busca" placeholder="Buscar produto, ID ou rastreio">
+              <select id="ped-status"></select>
+            </div>
+          </div>
+          <div class="table-wrap"><table class="tbl" id="tbl-pedidos"></table></div>
+        </div>
+      </section>
+
+      <!-- ===================== ESTOQUE INTELIGENTE ===================== -->
+      <section id="view-estoque" class="view">
+        <header class="view-head">
+          <div>
+            <h1>Estoque <em>Inteligente</em></h1>
+            <p class="lead">Cada variante é classificada sozinha por tamanho, cor e coleção. Dias restantes = estoque ÷ vendas por dia.</p>
+          </div>
+        </header>
+
+        <div class="banner" id="est-banner"></div>
+
+        <div class="kpis" id="est-kpis"></div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>Unidades vendidas por tamanho</h3><span class="hint">Agosto × Setembro</span></div>
+            <div class="chart-box"><canvas id="ch-tamanhos"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Teste o classificador</h3><span class="hint">Digite qualquer variante como vem da loja</span></div>
+            <div class="tester">
+              <input type="text" id="cls-input" value="Preto,Oversized G2" autocomplete="off">
+              <div class="tester-out" id="cls-out"></div>
+              <div class="tester-ex">
+                Exemplos:
+                <button data-ex="P / Preto">P / Preto</button>
+                <button data-ex="Off-white / G1">Off-white / G1</button>
+                <button data-ex="GG -Modelo Basico,Preto">GG -Modelo Basico,Preto</button>
+                <button data-ex="Tamanho: G 3 - Branca">Tamanho: G 3 - Branca</button>
+                <button data-ex="XL / Black">XL / Black</button>
+                <button data-ex="Moletom Canguru Horror - EGG / Preto">Moletom Canguru Horror - EGG / Preto</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Mapa de calor: estampa × tamanho</h3>
+            <span class="hint">Unidades vendidas em setembro, top 15 estampas</span>
+          </div>
+          <div class="table-wrap"><table class="heat" id="heatmap"></table></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Controle por variante</h3>
+            <div class="filters">
+              <input type="search" id="est-busca" placeholder="Buscar estampa">
+              <select id="est-colecao"></select>
+              <select id="est-status">
+                <option value="">Todos os status</option>
+                <option value="critico">Crítico</option>
+                <option value="atencao">Atenção</option>
+                <option value="ok">OK</option>
+                <option value="excesso">Excesso</option>
+              </select>
+            </div>
+          </div>
+          <div class="chips" id="est-tamanhos"></div>
+          <div class="table-wrap"><table class="tbl" id="tbl-estoque"></table></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="tooltip" class="tooltip" hidden></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/classificador.js"></script>
+  <script src="js/fonte-dados.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

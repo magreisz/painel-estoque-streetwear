@@ -1,0 +1,13 @@
+# dados reais (use só os dados fictícios de scripts/gerar_demo.py no repositório)
+*.xlsx
+*.csv
+
+# segredos
+.env
+.env.*
+!.env.example
+
+node_modules/
+.vercel/
+__pycache__/
+.DS_Store
